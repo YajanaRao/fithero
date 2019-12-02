@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Keyboard } from 'react-native';
-import { exercises } from 'dziku-exercises';
+import { exercises } from 'fithero-exercises';
 
 import { ExercisesScreen } from '../ExercisesScreen';
 import theme from '../../../utils/theme';
@@ -17,8 +17,11 @@ const mockRealmResults = new RealmResults();
 const mockRealmRecentResults = new RealmResults();
 mockRealmRecentResults.push({ type: 'bench-press' }, { type: 'barbell-squat' });
 
-jest.mock('Platform', () => ({ OS: 'android', select: jest.fn() }));
-jest.mock('Keyboard');
+jest.mock('react-native/Libraries/Utilities/Platform', () => ({
+  OS: 'android',
+  select: jest.fn(),
+}));
+jest.mock('react-native/Libraries/Components/Keyboard/Keyboard');
 jest.mock('../../../database/services/ExerciseService', () => ({
   getAllExercises: () => mockRealmResults,
 }));
